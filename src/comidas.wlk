@@ -7,10 +7,7 @@ object manzana {
 	method position() {
 		return position
 	}
-	method alColisionarCon(){
-		roque.agarrarComida(self)
-		self.aparecerEnTablero()
-	}
+	
 	method aparecerEnTablero(){
 		position = game.at(1.randomUpTo(5), 1.randomUpTo(5))
 		game.addVisual(self)
@@ -28,8 +25,5 @@ object alpiste {
 		position = game.at(1.randomUpTo(5), 1.randomUpTo(5))
 		game.addVisual(self)
 	}
-	method alColisionarCon(){
-		roque.agarrarComida(self)
-		self.aparecerEnTablero()
-	}
+	
 }

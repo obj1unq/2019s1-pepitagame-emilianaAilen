@@ -27,8 +27,8 @@ game.whenCollideDo(pepona,{golondrina => pepita.nuevaAmiga(pepona)})
 game.whenCollideDo(pepitaCanchera,{golondrina => pepita.nuevaAmiga(pepitaCanchera)})
 game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})
 game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})
-game.whenCollideDo(roque,{comida => manzana.alColisionarCon()})
-game.whenCollideDo(roque,{comida => alpiste.alColisionarCon()})
+game.whenCollideDo(manzana,{comida => roque.agarrarComida(manzana)})
+game.whenCollideDo(alpiste,{comida => roque.agarrarComida(alpiste)})
 	
 //	TECLADO
 	keyboard.h().onPressDo { game.say(pepita, "Hola chiques!") }

@@ -85,10 +85,14 @@ object pepita {
 		method image()= "jugador.png"
 		
 		method agarrarComida(comida){
-			if(mochila != comida){
+			if(mochila != null){
 				game.removeVisual(comida);
+				mochila.aparecerEnTablero()
 				mochila = comida;
-				
+			}
+			else{
+				game.removeVisual(comida)
+				mochila = comida
 			}
 		}
 		
