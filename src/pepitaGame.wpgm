@@ -2,6 +2,7 @@ import pepita.*
 import ciudades.*
 import comidas.*
 import wollok.game.*
+import roque.*
 
 program PepitaGame {
 	
@@ -25,10 +26,12 @@ program PepitaGame {
 
 game.whenCollideDo(pepona,{golondrina => pepita.nuevaAmiga(pepona)})
 game.whenCollideDo(pepitaCanchera,{golondrina => pepita.nuevaAmiga(pepitaCanchera)})
-game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})
-game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})
-game.whenCollideDo(manzana,{comida => roque.agarrarComida(manzana)})
-game.whenCollideDo(alpiste,{comida => roque.agarrarComida(alpiste)})
+/*game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})*/
+
+game.whenCollideDo(roque,{cosa => cosa.teEncontro(roque)}) // estrategia 1 double dispatch
+game.whenCollideDo(pepita,{cosa => cosa.teEncontro_(pepita)})
+game.whenCollideDo(roque,{persona => pepita.saludarPersona(roque)})
+game.whenCollideDo(pepita,{golondrina => roque.nuevaAmiga(pepita)})
 	
 //	TECLADO
 	keyboard.h().onPressDo { game.say(pepita, "Hola chiques!") }
@@ -46,6 +49,16 @@ game.whenCollideDo(alpiste,{comida => roque.agarrarComida(alpiste)})
 	keyboard.down().onPressDo { roque.move(roque.position().down(1)) }
 	keyboard.left().onPressDo { roque.move(roque.position().left(1)) }
 	keyboard.right().onPressDo { roque.move(roque.position().right(1)) }
+	
+	//
+	
+	keyboard.w().onPressDo { pepita.move(pepita.position().up(1)) }
+	keyboard.s().onPressDo { pepita.move(pepita.position().down(1)) }
+	keyboard.a().onPressDo { pepita.move(pepita.position().left(1)) }
+	keyboard.d().onPressDo { pepita.move(pepita.position().right(1)) }
+	//
+	keyboard.m().onPressDo{roque.dejarComida(manzana)}
+	keyboard.l().onPressDo{roque.dejarAlpiste(alpiste)}
 		
 //	START
 	game.start()
