@@ -1,6 +1,7 @@
 import wollok.game.*
 import pepita.*
-object manzana {
+import roque.*
+/*object manzana {
 	var position = game.at(5, 1)
 	method image() = "manzana.png"
 	method energia() = 80
@@ -20,27 +21,25 @@ object manzana {
 	}
 	
 }
-
+*/
 class Manzana {
-	var position
+	var property energia = 80
+	var position = game.at(5, 1)
 	method image() = "manzana.png"
-	method energia() = 80
-	method position(x, y) {
-	position = game.at(x,y)
-	}
 	
-	method aparecerEnTablero(){
+	
+	/*method aparecerEnTablero(){
 		position = game.at(1.randomUpTo(5), 1.randomUpTo(5))
 		game.addVisual(self)
-	}
-	method teEncontro(alguien){
-		alguien.agarrarComida(self)
-	}
+	}*/
 	method teEncontro_(unAve){
 		unAve.come(self)
 	}
 	method nuevaPosicion(nuevaPosicion){
 		position = nuevaPosicion
+	}
+	method esDejadaPor(persona){
+		game.addVisualIn(self, persona.position())
 	}
 }
 
@@ -48,12 +47,12 @@ class Manzana {
 
 
 class Alpiste {
-	var cantGranos
-	var position
+	var cantGranos = 5
+	var position =  game.at(5, 5)
 	method image() = "alpiste.png"
-	method position(x, y) {
+	/*method position(x, y) {
 	position = game.at(x,y)
-	}
+	}*/
 	method nuevaPosicion(nuevaPosicion){
 		position = nuevaPosicion
 	}
@@ -61,15 +60,18 @@ class Alpiste {
 		cantGranos = cant
 	}
 	method energia() = 0.5 * cantGranos
-	method aparecerEnTablero(){
+	/*method aparecerEnTablero(){
 		position = game.at(1.randomUpTo(5), 1.randomUpTo(5))
 		game.addVisual(self)
-	}
-	method teEncontro(alguien){
-		alguien.agarrarComida(self)
-	}
+	}*/
 	method teEncontro_(unAve){
 		unAve.come(self)
+	}
+	method esDejadaPor(persona){
+		self.cantidadGranos(persona.cantGranos())
+		game.addVisualIn(self, persona.position())
+		persona.cantGranos(0)
+		
 	}
 	
 }

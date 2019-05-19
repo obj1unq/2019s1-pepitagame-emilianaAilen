@@ -13,35 +13,35 @@ program PepitaGame {
 	game.ground("suelo.png")
 
 //	VISUALES
-	game.addVisual(alpiste)
-	game.addVisual(manzana)
+	game.addVisual(new Alpiste())
+	game.addVisual(new Manzana())
 	game.addVisual(buenosAires)
 	game.addVisual(villaGesell)
 	game.addVisual(pepita)
-	game.addVisual(pepona)
-	game.addVisual(pepitaCanchera)
+	/*game.addVisual(pepona)
+	game.addVisual(pepitaCanchera)*/
 	game.addVisual(roque)
 	
 //COLISIONES
 
-game.whenCollideDo(pepona,{golondrina => pepita.nuevaAmiga(pepona)})
+/*game.whenCollideDo(pepona,{golondrina => pepita.nuevaAmiga(pepona)})
 game.whenCollideDo(pepitaCanchera,{golondrina => pepita.nuevaAmiga(pepitaCanchera)})
-/*game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})*/
+game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})
+game.whenCollideDo(pepita,{golondrina => roque.alimentar(pepita)})
 
-game.whenCollideDo(roque,{cosa => cosa.teEncontro(roque)}) // estrategia 1 double dispatch
+game.whenCollideDo(alpiste,{comida => roque.agarrarComida(alpiste)})*/
+
 game.whenCollideDo(pepita,{cosa => cosa.teEncontro_(pepita)})
-game.whenCollideDo(roque,{persona => pepita.saludarPersona(roque)})
-game.whenCollideDo(pepita,{golondrina => roque.nuevaAmiga(pepita)})
-	
+game.whenCollideDo(roque,{cosa => cosa.teEncontro_(roque)})
 //	TECLADO
 	keyboard.h().onPressDo { game.say(pepita, "Hola chiques!") }
-	keyboard.m().onPressDo{
+/* 	keyboard.m().onPressDo{
 		pepita.moveteyCome_(manzana)
 	}
 	keyboard.a().onPressDo{
 		pepita.moveteyCome_(alpiste)
 	}
-
+*/
 	keyboard.v().onPressDo { pepita.volaHacia(villaGesell) }
 	keyboard.b().onPressDo { pepita.volaHacia(buenosAires) }
 
@@ -57,8 +57,8 @@ game.whenCollideDo(pepita,{golondrina => roque.nuevaAmiga(pepita)})
 	keyboard.a().onPressDo { pepita.move(pepita.position().left(1)) }
 	keyboard.d().onPressDo { pepita.move(pepita.position().right(1)) }
 	//
-	keyboard.m().onPressDo{roque.dejarComida(manzana)}
-	keyboard.l().onPressDo{roque.dejarAlpiste(alpiste)}
+	keyboard.m().onPressDo{roque.dejarComida(new Manzana())}
+	keyboard.l().onPressDo{roque.dejarComida(new Alpiste())}
 		
 //	START
 	game.start()
